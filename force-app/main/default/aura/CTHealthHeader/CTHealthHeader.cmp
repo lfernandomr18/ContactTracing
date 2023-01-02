@@ -1,4 +1,13 @@
-<aura:component>
+<aura:component controller="CTHealthHeaderController">
+    <aura:attribute name="pageHeaderTitle" type="String" default="Person View"  />
+
+    <aura:attribute name="green" type="String" default="0" />
+    <aura:attribute name="yellow" type="String" default="0" />
+    <aura:attribute name="orange" type="String" default="0" />
+    <aura:attribute name="red" type="String" default="0" />
+
+    <aura:handler event="c:tabSelectedEvent" action="{!c.tabSelectedHandler}" />
+
     <div class="slds-page-header slds-page-header_record-home">
             <div class="slds-page-header__row">
                 <div class="slds-page-header__col-title">
@@ -13,7 +22,7 @@
                                 <div class="slds-page-header__name-title">
                                     <h1>
                                     <span>Contact Tracing</span>
-                                    <span class="slds-page-header__title slds-truncate" title="Person View">Person View</span>
+                                    <span class="slds-page-header__title slds-truncate" title="{!v.pageHeaderTitle}">{!v.pageHeaderTitle}</span>
                                     </h1>
                                 </div>
                             </div>
@@ -26,7 +35,7 @@
                                 <div class="slds-page-header__control">
                                     <ul class="slds-button-group-list">
                                         <li>
-                                            <button class="slds-button slds-button_neutral">Add New</button>
+                                            <button class="slds-button slds-button_neutral" onclick="{!c.createRecord}">Add New</button>
                                         </li>
                                     </ul>
                                 </div>
@@ -39,19 +48,19 @@
                     <ul class="slds-page-header__detail-row">
                         <li class="slds-page-header__detail-block">
                             <div class="header-item green" title="Green">Green</div>
-                            <div class="header-item green" title="">23</div>
+                            <div class="header-item green" title="">{!v.green}</div>
                         </li>
                         <li class="slds-page-header__detail-block">
                             <div class="header-item yellow" title="Yellow">Yellow</div>
-                            <div class="header-item yellow" title="">23</div>
+                            <div class="header-item yellow" title="">{!v.yellow}</div>
                         </li>
                         <li class="slds-page-header__detail-block">
                             <div class="header-item orange" title="Orange">Orange</div>
-                            <div class="header-item orange" title="">23</div>
+                            <div class="header-item orange" title="">{!v.orange}</div>
                         </li>
                         <li class="slds-page-header__detail-block">
                             <div class="header-item red" title="Red">Red</div>
-                            <div class="header-item red" title="">23</div>
+                            <div class="header-item red" title="">{!v.red}</div>
                         </li>
                     </ul>
                 </div>

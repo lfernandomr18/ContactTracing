@@ -1,15 +1,23 @@
 <aura:component implements="force:appHostable">
+    <aura:attribute name="pageHeaderTitle" type="String" default="Person View" />
+    
+    <aura:attribute name="green" type="String" default="0" />
+    <aura:attribute name="yellow" type="String" default="0" />
+    <aura:attribute name="orange" type="String" default="0" />
+    <aura:attribute name="red" type="String" default="0" />
+
+    
     <div class="container">
         <lightning:layout multipleRows="true">
             <lightning:layoutItem size="12">
-                <c:CTHealthHeader/>
+                <c:CTHealthHeader pageHeaderTitle="{!v.pageHeaderTitle}"/>
             </lightning:layoutItem>
             <lightning:layoutItem size="12">
                 <lightning:tabset variant="vertical">
-                    <lightning:tab label="Person View" id="person_view">
+                    <lightning:tab label="Person View" id="person_view" onactive="{!c.handleActive}">
                         Person View
                     </lightning:tab>
-                    <lightning:tab label="Location View" id="location_view">
+                    <lightning:tab label="Location View" id="location_view" onactive="{!c.handleActive}">
                         Location View
                     </lightning:tab>
                 </lightning:tabset>
