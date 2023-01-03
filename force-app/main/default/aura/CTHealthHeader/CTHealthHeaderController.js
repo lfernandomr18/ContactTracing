@@ -1,24 +1,18 @@
 ({
-    createRecord : function (component, event, helper) {
+    createRecord : function (component) {
         const selectedTabValue=component.get("v.pageHeaderTitle");
-        let entityApiName="";
-        if(selectedTabValue=="Person View"){
-            entityApiName="Person__c";
-        }
-        else{
-            entityApiName="Location__c";
-        }
-        console.log(selectedTabValue);
         var createRecordEvent = $A.get("e.force:createRecord");
         createRecordEvent.setParams({
-            "entityApiName": entityApiName
+            "entityApiName": selectedTabValue =="Person View" ? "Person__c": "Location__c"
         });
         createRecordEvent.fire();
     },
     tabSelectedHandler : function(component,event,helper){
+        //clearea los header a 0
         helper.clearheader(component);
+        //obtiene el tab del evento tabSelectedEvent
         const selectedTab = event.getParam("selectedTab");
-        // create apex method call action
+        // create apex method call action depending on tab selection
         let action=null;
         if(selectedTab=="person_view"){
            action = component.get("c.getPersonHealthStatusCount");
@@ -31,42 +25,7 @@
             const state = response.getState();
             if (state === 'SUCCESS') {
                 const resp = response.getReturnValue();
-                if(selectedTab=="person_view"){
-                    for (let index = 0; index < resp.length; index++) {
-                        if(resp[index].Health_Status__c=="Green"){
-                            component.set("v.green",resp[index].personCount);
-                        }
-                        else if(resp[index].Health_Status__c=="Yellow"){
-                            component.set("v.yellow",resp[index].personCount);
-                        }
-                        else if(resp[index].Health_Status__c=="Orange"){
-                            component.set("v.orange",resp[index].personCount);
-                        }
-                        else{
-                            component.set("v.red",resp[index].personCount);
-                        }  
-                    }
-
-                }
-                else{ 
-                    for (let index = 0; index < resp.length; index++) {
-                        if(resp[index].Status__c=="Green"){
-                            component.set("v.green",resp[index].LocationCount);
-                        }
-                        else if(resp[index].Status__c=="Yellow"){
-                            component.set("v.yellow",resp[index].LocationCount);
-                        }
-                        else if(resp[index].Status__c=="Orange"){
-                            component.set("v.orange",resp[index].LocationCount);
-                        }
-                        else{
-                            component.set("v.red",resp[index].LocationCount);
-                        }  
-                    }
-                }
-               
-                
-                console.log(resp);
+                helper.assignValuesToHeader(component,resp,selectedTab);
             }
         });
         $A.enqueueAction(action);
