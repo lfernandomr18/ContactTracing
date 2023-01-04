@@ -1,6 +1,10 @@
 ({
-    getData : function(cmp) {
-        var action = cmp.get('c.getRecentPersonHealthChanges');
+    getData : function(cmp,selectedTab) {
+        if(selectedTab=="person_view"){var action = cmp.get('c.getRecentPersonHealthChanges');}
+        else{var action = cmp.get('c.getRecentLocationHealthChanges');}
+        
+        
+        
         action.setCallback(this, $A.getCallback(function (response) {
             var state = response.getState();
             if (state === "SUCCESS") {
