@@ -1,0 +1,16 @@
+<aura:component>
+<aura:attribute name="recordId" type="string"/>
+<aura:attribute name="status" type="string" />
+<aura:handler event="c:CTLocationSelectEvent" action="{!c.eventHandler}" />
+<lightning:recordViewForm recordId="{!v.recordId}" objectApiName="Location__c">
+        <div class="{!v.status +' location-card'}">
+            <lightning:outputField fieldName="Name" />
+            <lightning:outputField fieldName="Address__c" />
+            <lightning:outputField fieldName="Pincode__c" />
+            <lightning:outputField fieldName="Red_Score__c" />
+            <lightning:outputField fieldName="Status_Update_Date__c" />
+            <lightning:outputField fieldName="Status__c" />
+        </div>
+    </lightning:recordViewForm>
+
+</aura:component>	

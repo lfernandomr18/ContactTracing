@@ -17,7 +17,8 @@
                     keyField="id"
                     data="{! v.data }"
                     columns="{! v.columns }"
-                    hideCheckboxColumn="true"/>
+                    hideCheckboxColumn="true"
+                    onrowaction="{! c.handleRowAction }"/>
         </div>
     </lightning:card>
 </aura:component>	

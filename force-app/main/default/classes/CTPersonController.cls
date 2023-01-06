@@ -123,5 +123,13 @@ public with sharing class CTPersonController {
         }
         return secondaryContacts;
     }
+    public static void updateHealthStatusToRed(String recordId){
+        Person__c person = [SELECT Id, Health_Status__c FROM Person__c WHERE Id = :recordId];
+        person.Health_Status__c = 'Red';
+        List<Person__c> personToUpdate = new List<Person__c>();
+        personToUpdate.add(person);
+        update personToUpdate;
+
+    }
     
 }
