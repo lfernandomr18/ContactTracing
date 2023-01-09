@@ -5,7 +5,7 @@ public with sharing class CTLocationTracingDataCleanupBatch  implements Database
              return Database.getQueryLocator('SELECT Id FROM Location_tracing__c WHERE Visit_Date__c< LAST_N_DAYS : 30');
         }
     
-        public void execute(Database.BatchableContext bc,List<People_Tracing__c> scope){
+        public void execute(Database.BatchableContext bc,List<Location_tracing__c> scope){
             delete scope;
         }
     
