@@ -38,7 +38,8 @@
                     </lightning:tab>
                     
                 </lightning:tabset>
-            </lightning:layoutItem >  
+            </lightning:layoutItem > 
+             
         </lightning:layout>
     </div>
 </aura:component>	
