@@ -1,9 +1,10 @@
 public with sharing class CTLocationTracingController {
    
     public static List<Location_Tracing__c> getVisitors(String locationId){
-        return [SELECT Location__c, Visit_Date__c, Person__c, Id, Name,Person__r.Health_Status__c 
+        return [SELECT Id, Name, Person__r.Name, Location__r.Name, Visit_Date__c,Person__r.Health_Status__c
         FROM Location_Tracing__c 
         WHERE Location__c=: locationId
+        AND Visit_Date__c = LAST_N_DAYS:30
         WITH SECURITY_ENFORCED 
         ORDER BY Visit_Date__c DESC];
     }
