@@ -39,8 +39,6 @@ public with sharing class CTUserTabController {
         return info;
      
    }
-
-
    public class UserInformation{
     @AuraEnabled public String name;
     @AuraEnabled public String token;
